@@ -1,34 +1,46 @@
+// TODO: import all necessary things, including browser router, route, and link
+// ? https://reactrouter.com/en/main
+// ? https://reactrouter.com/web/api/BrowserRouter
+
+import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import './App.css'
+
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
+    // TODO: add main JSX inside of <BrowserRouter> and <Route> tags
+    // ? https://reactrouter.com/web/api/Route
+    // ? https://reactrouter.com/web/api/Route/route-render-methods
+    // ? https://reactrouter.com/web/api/Route/route-props
+    // ? https://reactrouter.com/web/api/Link
+    // ? https://reactrouter.com/web/api/Link/to-object
+    <>
+    <header className="App-header">
+      <h1>PixelInsight Image Generator</h1>
+      <div id="prompt-wrapper">
+        <input placeholder='Enter Prompt Here' type="text" />
+        <button>Create!</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+    </header>
+    <main>
+      <h2>See what others created!</h2>
+      <div id="example-image-wrapper">
+        <img src={reactLogo} alt="React Logo" />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    </main>
+    <footer>
+
+      <p>© 2023 Pixel Insight</p>
+      
+    </footer>
+    
+    </>
   )
 }
-
+// TODO: Make sure image resolution for home page images is semi-small to help with load times and cost's
 export default App
