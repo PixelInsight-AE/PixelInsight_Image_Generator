@@ -1,4 +1,3 @@
-
 // ! importing all the dependencies
 import express from 'express';
 import * as dotenv from 'dotenv';
@@ -9,17 +8,58 @@ dotenv.config();
 
 // ! initializing the app
 // TODO: openai configuration
+const configuration = new Configuration({
+  apiKey: process.env.OPEN_AI_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
 // TODO: initialize express app
-// TODO: use cors
-// TODO: use express.json
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+
+
 
 
 // ! get from front end
 // TODO: app.get hello world
 
+app.get('/', async (req, res) => {
+  res.send('Hello World!');
+});
+
+
 // ! post to front end
 // TODO: app.post /api/complete
 
+app.post('/generator', async (req, res) => {
+  const { prompt } = req.body;
+
+  try {
+    // ! n is the number of images you want to generate, sizes available are 256x256, 512x512, 1024x1024
+    const response = await openai
+      .createImage({
+        prompt: "white cat",
+        n: 3,
+        size: "256x256",
+      })
+      .catch((error) => {
+        console.log(`OPENAI ERR: ${error}`);
+      });
+
+      console.log(response);
+
+        image_url = response.data.data[i].url;
+
+      
+      
+
+      res.status(200).send(image_url);
+  } catch (error) {
+    console.log(`ERR: ${error}`);
+  }
+});
 
 
 
@@ -56,3 +96,6 @@ const examplePrompts = [
 
 // ! listen to port
 // TODO: app.listen
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
+});

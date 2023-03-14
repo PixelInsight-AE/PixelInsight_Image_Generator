@@ -20,6 +20,8 @@ function App() {
     // ? https://reactrouter.com/web/api/Link
     // ? https://reactrouter.com/web/api/Link/to-object
     <>
+
+    {/* header */}
     <header className="App-header">
       <h1>PixelInsight Image Generator</h1>
       <div id="prompt-wrapper">
@@ -27,16 +29,18 @@ function App() {
         <button>Create!</button>
       </div>
     </header>
+
+    {/* main */}
     <main>
       <h2>See what others created!</h2>
       <div id="example-image-wrapper">
         <img src={reactLogo} alt="React Logo" />
       </div>
     </main>
-    <footer>
 
+    {/* footer */}
+    <footer>
       <p>© 2023 Pixel Insight</p>
-      
     </footer>
     
     </>
