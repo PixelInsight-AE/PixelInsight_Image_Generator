@@ -33,25 +33,26 @@ app.get('/', async (req, res) => {
 // ! post to front end
 // TODO: app.post /api/complete
 
-app.post('/generator', async (req, res) => {
+app.post('/posts', async (req, res) => {
   const { prompt } = req.body;
-
+  console.log(prompt);
   try {
     // ! n is the number of images you want to generate, sizes available are 256x256, 512x512, 1024x1024
     const response = await openai
       .createImage({
         prompt: "white cat",
-        n: 3,
+        n: 1,
         size: "256x256",
       })
       .catch((error) => {
         console.log(`OPENAI ERR: ${error}`);
       });
 
-      console.log(response);
+      console.log(response.data);
+      
 
-        image_url = response.data.data[i].url;
-
+      const image_url = response.data;
+      console.log(image_url);
       
       
 

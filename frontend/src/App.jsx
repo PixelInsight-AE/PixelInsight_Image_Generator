@@ -7,6 +7,44 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 
 
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  const prompt = document.getElementById('prompt-input').value;
+
+  console.log(prompt);
+
+  // fetch data from openAi
+  const response = await fetch(`http://localhost:5174/posts`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      prompt: prompt,
+    })
+  });
+
+  // console.log(response.body);
+
+  console.log(response);
+  
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+  } else {
+    const err = await response.text();
+    console.log(err);
+    alert(err);
+  }
+  
+}
+
+
+
+// handleSubmit();
+
+
+// TODO: get the input value from the input field, and set it to the state, so that it can be sent to the backend
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,11 +62,12 @@ function App() {
     {/* header */}
     <header className="App-header">
       <h1>PixelInsight Image Generator</h1>
-      <div id="prompt-wrapper">
-        <input placeholder='Enter Prompt Here' type="text" />
-        <button>Create!</button>
-      </div>
-    </header>
+      <form id="prompt-wrapper">
+        <input id='prompt-input' placeholder='Enter Prompt Here' type="text" />
+        <button type='submit' onClick={handleSubmit}>Create!</button>
+      </form>
+
+    </header> 
 
     {/* main */}
     <main>
