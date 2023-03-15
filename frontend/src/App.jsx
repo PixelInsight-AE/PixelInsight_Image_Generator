@@ -4,16 +4,13 @@
 
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+// import reactLogo from './assets/react.svg'
 
-
-const handleSubmit = async (event) => {
+const handleSubmit = async (event, setGeneratedImage) => {
   event.preventDefault();
   const prompt = document.getElementById('prompt-input').value;
 
   console.log(prompt);
-
-  // fetch data from openAi
   const response = await fetch(`http://localhost:5174/posts`, {
     method: 'POST',
     headers: {
@@ -23,32 +20,60 @@ const handleSubmit = async (event) => {
       prompt: prompt,
     })
   });
-
   // console.log(response.body);
-
-  console.log(response);
+  console.log(response);  
   
   if (response.ok) {
     const data = await response.json();
-    console.log(data);
-  } else {
+    console.log(data.data[0].url);
+    setGeneratedImage(data.data[0].url);
+    
+    
+  } else { 
     const err = await response.text();
-    console.log(err);
     alert(err);
+    console.log(err);
   }
+
+}
+
+function GeneratedImageComponent() {
+  const [generatedImage, setGeneratedImage] = useState();
   
+  const handleSubmitWithState = async(event) => {
+    await handleSubmit(event, setGeneratedImage);
+  }
+
+  return (
+    <div>
+      <h1>See What Others have Created!</h1>
+      <form onSubmit={handleSubmitWithState}>
+        <label>
+          Prompt:
+          <input type="text" id="prompt-input" />
+        </label>
+        <button type="submit">Generate Image</button>
+      </form>
+      <img src={generatedImage} alt="React Logo" />
+    </div>
+  )
 }
 
 
+/* function GeneratedImageComponent() {
+  const [generatedImage, setGeneratedImage] = useState();
+  
+  return (
+    <div>
+    <h1>See What Others have Created!</h1>
+    <img src={generatedImage} alt="React Logo" />
+    </div>
+    )
+  } */
 
-// handleSubmit();
-
-
-// TODO: get the input value from the input field, and set it to the state, so that it can be sent to the backend
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  //const [count, setCount] = useState(0)
   return (
 
     // TODO: add main JSX inside of <BrowserRouter> and <Route> tags
@@ -62,19 +87,17 @@ function App() {
     {/* header */}
     <header className="App-header">
       <h1>PixelInsight Image Generator</h1>
-      <form id="prompt-wrapper">
+      {/* <form id="prompt-wrapper">
         <input id='prompt-input' placeholder='Enter Prompt Here' type="text" />
         <button type='submit' onClick={handleSubmit}>Create!</button>
-      </form>
+      </form> */}
 
     </header> 
 
     {/* main */}
     <main>
-      <h2>See what others created!</h2>
-      <div id="example-image-wrapper">
-        <img src={reactLogo} alt="React Logo" />
-      </div>
+      <GeneratedImageComponent />
+      
     </main>
 
     {/* footer */}

@@ -40,7 +40,7 @@ app.post('/posts', async (req, res) => {
     // ! n is the number of images you want to generate, sizes available are 256x256, 512x512, 1024x1024
     const response = await openai
       .createImage({
-        prompt: "white cat",
+        prompt: prompt,
         n: 1,
         size: "256x256",
       })
@@ -52,6 +52,7 @@ app.post('/posts', async (req, res) => {
       
 
       const image_url = response.data;
+
       console.log(image_url);
       
       
@@ -64,7 +65,7 @@ app.post('/posts', async (req, res) => {
 
 
 
-
+let randomPrompt = Math.floor(Math.random() * 25);
 
 
 const examplePrompts = [
@@ -94,7 +95,7 @@ const examplePrompts = [
   "A post-apocalyptic wasteland with ruins",
   "A serene mountain lake at sunset"
 ]
-
+//console.log(examplePrompts[randomPrompt]);
 // ! listen to port
 // TODO: app.listen
 app.listen(process.env.PORT, () => {
