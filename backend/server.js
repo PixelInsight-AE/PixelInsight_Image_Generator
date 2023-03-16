@@ -1,4 +1,4 @@
-// ! importing all the dependencies
+// importing all the dependencies
 import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
@@ -6,56 +6,35 @@ import { Configuration, OpenAIApi } from 'openai';
 
 dotenv.config();
 
-// ! initializing the app
-// TODO: openai configuration
+// initializing the app
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
-// TODO: initialize express app
+const openai = new OpenAIApi(configuration);
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 
-
-
-
-// ! get from front end
-// TODO: app.get hello world
-
-app.get('/', async (req, res) => {
-  res.send('Hello World!');
-});
-
-
-// ! post to front end
-// TODO: app.post /api/complete
-
+// post to front end
 app.post('/posts', async (req, res) => {
   const { prompt } = req.body;
   console.log(prompt);
   try {
-    // ! n is the number of images you want to generate, sizes available are 256x256, 512x512, 1024x1024
-    const response = await openai
-      .createImage({
-        prompt: prompt,
-        n: 1,
-        size: "256x256",
+    const response = await openai.createImage({
+        prompt: prompt,    // ? prompt is the text you want to generate an image from
+        n: 1,              // ? n is the number of images you want to generate, sizes available are 256x256, 512x512, 1024x1024
+        size: "256x256",   // ? size is the size of the image you want to generate
       })
       .catch((error) => {
         console.log(`OPENAI ERR: ${error}`);
       });
 
       console.log(response.data);
-      
-
+  
       const image_url = response.data;
-
       console.log(image_url);
-      
-      
 
       res.status(200).send(image_url);
   } catch (error) {
@@ -64,10 +43,7 @@ app.post('/posts', async (req, res) => {
 });
 
 
-
 let randomPrompt = Math.floor(Math.random() * 25);
-
-
 const examplePrompts = [
   "A city skyline at sunset",
   "A vibrant tropical forest",
@@ -96,8 +72,20 @@ const examplePrompts = [
   "A serene mountain lake at sunset"
 ]
 //console.log(examplePrompts[randomPrompt]);
-// ! listen to port
-// TODO: app.listen
+// listen to port
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
 });
+
+/**
+ * TODO: Make an endpoint for images generated from the random prompt array
+ * TODO: Make an endpoint for images generated from the user input
+ * TODO: Make and endpoint for modifying a image uploaded by the user
+ * TODO: Include Docs to relevant dependencies.
+ * 
+ * ? EXPRESS DOCS : https://expressjs.com/
+ * ? OPENAI DOCS : https://beta.openai.com/docs/
+ * ? DOTENV DOCS : https://www.npmjs.com/package/dotenv
+ * ? CORS DOCS : https://www.npmjs.com/package/cors
+ * 
+ */
