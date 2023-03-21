@@ -43,7 +43,7 @@ app.post('/posts', async (req, res) => {
 });
 
 
-let randomPrompt = Math.floor(Math.random() * 25);
+
 const examplePrompts = [
   "A city skyline at sunset",
   "A vibrant tropical forest",

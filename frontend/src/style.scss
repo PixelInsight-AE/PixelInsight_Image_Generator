@@ -2,67 +2,129 @@
   margin: 0;
   padding: 0;
   font-size: large;
+  font-family: 'Noto Sans Avestan', sans-serif;
+}
+
+body {
+  background-image: linear-gradient(to bottom, #000000, #808080);
+  background-repeat: none;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh;
 }
 
 header {
+  color: #fff;
+  padding-top: 1rem;
+  text-align: center;
+   
+    img {
+      //border-radius: 50%;
+      width: 250px;
+    }
+    
+    p {
+      font-size: 1rem;
+      font-weight: 300;
+    }
+}
+
+form {
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #000;
-  color: #fff;
-  padding-bottom: 1rem;
+  justify-content: center;
+  padding: 1rem;
 
-  #prompt-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 1rem;
-
-    input {
-      margin: 0 1rem;
-      padding: 0.5rem;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 1.5rem;
-    }
-    button {
-      padding: 0.5rem;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 1.5rem;
-      background-color: #fff;
-      color: #000;
+  input {
+    width: 300px;
+    padding: 0.25rem;
+    border: 1px solid #ffd700;
+    border-radius: 0.5rem;
+    //margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(218, 208, 76, 0.815);
+    font-size: 0.75rem;
+    &:focus {
+      outline: none;
+      border: 2px solid #ffd700;
     }
   }
-  h1 {
-    font-size: 3rem;
+  
+  button {
     margin: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #ffd700;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    box-shadow: 0 2px 4px rgba(218, 208, 76, 0.815);
+    transition: all 0.3s ease-in-out;
+    
+    &:hover {
+      background-color: #fff;
+      color: #000;
+      cursor: pointer;
+    }
+    
+    @media (min-width: 576px) {
+      display: none;
+    }
   }
 }
 
-
-main {
-
-  height: 100vh;
-  background-color: #fff;
-  color: #000;
-  padding: 1rem;
-  overflow: auto;
-
-  h2 {
-    text-align: center;
+.image-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* creates 3 columns with equal widths */
+  grid-gap: 1rem; /* adds a gap between grid items */
+  overflow: none;
+  align-items: center;
+  padding: 0.25rem; 
+  color: #fff;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+    border: 1px solid #ffd700;
+    box-shadow: 0 2px 4px rgba(218, 208, 76, 0.815);
+    border-radius: 0.5rem;
   }
-  #example-image-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-        image {
-          width: 200px;
-        }
-    }
 }
 
 footer {
-  text-align: center;  
+  color: #fff;
+  background-color: #000;
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(218, 208, 76, 0.815);
+  i {
+    color: #ffd700;
+    margin-left: 1rem;
+  }
 }
+
+
+// bootstrap media queries
+@media (min-width: 320px) {
+  .image-container {
+    grid-template-columns: repeat(1, 1fr); /* creates 4 columns with equal widths */
+  }
+}
+@media (min-width: 576px) {
+  .image-container {
+    grid-template-columns: repeat(2, 1fr); /* creates 4 columns with equal widths */
+  }
+}
+
+@media (min-width: 768px) {
+  .image-container {
+    grid-template-columns: repeat(3, 1fr); /* creates 5 columns with equal widths */
+  }
+}
+
