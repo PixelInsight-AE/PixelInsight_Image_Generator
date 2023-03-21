@@ -24,7 +24,7 @@ app.post('/posts', async (req, res) => {
   try {
     const response = await openai.createImage({
         prompt: prompt,    // ? prompt is the text you want to generate an image from
-        n: 1,              // ? n is the number of images you want to generate, sizes available are 256x256, 512x512, 1024x1024
+        n: 9,              // ? n is the number of images you want to generate, sizes available are 256x256, 512x512, 1024x1024
         size: "256x256",   // ? size is the size of the image you want to generate
       })
       .catch((error) => {
